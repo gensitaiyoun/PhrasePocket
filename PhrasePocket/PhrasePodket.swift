@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class PhrasePocket: Object{
- @objc dynamic var title: String = ""
+class Phrase: Object{
  @objc dynamic var content: String = ""
+@objc dynamic var type: String = ""
 }

@@ -12,40 +12,40 @@ class ViewController: UIViewController {
 
     let realm = try! Realm()
     
-    @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentTextField: UITextField!
+    @IBOutlet var typeTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let memo: PhrasePocket? = read()
+        let memo: Phrase? = read()
         
         if let memo = memo {
-            titleTextField.text = memo.title
             contentTextField.text = memo.content
+            typeTextField.text = memo.type
             
         }
     }
-    func read() -> PhrasePocket? {
-        return realm.objects(PhrasePocket.self).first
+    func read() -> Phrase? {
+        return realm.objects(Phrase.self).first
     }
     
     @IBAction func save() {
-        let title: String = titleTextField.text!
         let content: String = contentTextField.text!
+        let type: String = typeTextField.text!
     
-        let memo: PhrasePocket? = read()
+        let memo: Phrase? = read()
     
         if memo != nil {
              try! realm.write{
-                 memo!.title=title
                  memo!.content = content
+                 memo!.type = content
              }
         } else {
-             let newMemo = PhrasePocket()
-             newMemo.title = title
+             let newMemo = Phrase()
              newMemo.content = content
+            newMemo.type = type
             
              try! realm.write{
                 realm.add(newMemo)
